@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arbor Barbers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    header img {
+      max-width: 200px;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+    section {
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      background-color: white;
+      margin-top: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    input, textarea, button {
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.jpeg" alt="Arbor Barbers Logo" />
+    <h1>Arbor Barbers</h1>
+    <p>Tree Removal & Pruning Services</p>
+  </header>
+
+  <section>
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/xeqynqpj" method="POST" onsubmit="handleForm(event)">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <script>
+    function handleForm(event) {
+      event.preventDefault();
+      const form = event.target;
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          form.innerHTML = "<p>Thanks! Your message was sent.</p>";
+        } else {
+          form.innerHTML = "<p>Something went wrong. Please try again.</p>";
+        }
+      }).catch(() => {
+        form.innerHTML = "<p>Could not submit the form. Please check your connection and try again.</p>";
+      });
+    }
+  </script>
+</body>
+</html>
